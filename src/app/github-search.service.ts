@@ -1,0 +1,33 @@
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment'
+import { HttpClient} from '@angular/common/http';
+import { Observable, throwError,catchError } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GithubSearchService {
+
+  constructor(private http:HttpClient) { }
+  getUser(): Promise<any> {
+    return this.http.get("https://api.github.com/users/violetauko?Authorization=Basic " +environment.apiKey)
+    .pipe(
+      catchError(err=>{
+        console.log(err);
+        return throwError(
+          'Something bad happened; please try again later.');
+      })
+    ).toPromise();
+  }
+  searchUser(login: string): Promise<any> {
+    return this.http.get(`https://api.github.com/users/${login}`)
+    .pipe(
+      catchError(err=>{
+        console.log(err);
+        return throwError(
+          'Something bad happened; please try again later.');
+      })
+    ).toPromise();
+  }
+}
