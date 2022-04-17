@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment'
 import { HttpClient} from '@angular/common/http';
-import { Observable, throwError,catchError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { throwError,catchError } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,26 @@ export class GithubSearchService {
   }
   searchUser(login: string): Promise<any> {
     return this.http.get(`https://api.github.com/users/${login}`)
+    .pipe(
+      catchError(err=>{
+        console.log(err);
+        return throwError(
+          'Something bad happened; please try again later.');
+      })
+    ).toPromise();
+  }
+  fetchFollowers(followers_url: string): Promise<any> {
+    return this.http.get(`${followers_url}`)
+    .pipe(
+      catchError(err=>{
+        console.log(err);
+        return throwError(
+          'Something bad happened; please try again later.');
+      })
+    ).toPromise();
+  }
+  fetchFollowing(following_url: string): Promise<any> {
+    return this.http.get(`${following_url}`)
     .pipe(
       catchError(err=>{
         console.log(err);
