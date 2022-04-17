@@ -8,9 +8,20 @@ import { throwError,catchError } from 'rxjs';
   providedIn: 'root'
 })
 export class GithubSearchService {
+  searchRepository: any;
 
   constructor(private http:HttpClient) { }
   getUser(): Promise<any> {
+    return this.http.get("https://api.github.com/users/violetauko?Authorization=Basic " +environment.apiKey)
+    .pipe(
+      catchError(err=>{
+        console.log(err);
+        return throwError(
+          'Something bad happened; please try again later.');
+      })
+    ).toPromise();
+  }
+  getRepositories(): Promise<any> {
     return this.http.get("https://api.github.com/users/violetauko?Authorization=Basic " +environment.apiKey)
     .pipe(
       catchError(err=>{

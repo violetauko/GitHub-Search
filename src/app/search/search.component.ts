@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { User } from '../user/user';
 import { GithubSearchService } from '../github-search.service'; 
+import { Repository } from '../repository'
 
 @Component({
   selector: 'app-search',
@@ -37,5 +38,4 @@ export class SearchComponent implements OnInit {
           }).catch(error=>{console.error(error);});
     }).catch(error=>{console.error(error);});
   }
-
 }
