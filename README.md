@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
 
 # Author
-created by [Violet Auko]
+created by Violet Auko
 
 # Description
 This project is about consuming Github Api to display user details and user repositories.One can also search for a user of choice and repositories. 
