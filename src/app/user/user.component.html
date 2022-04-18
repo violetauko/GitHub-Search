@@ -3,10 +3,9 @@
   <button class="btn btn-outline-dark"  (click)="searchUser()">Search</button>
 </form>
 
-<div *ngIf="searchResult">
-
-
 <div class ="container">
+<h3>USERS</h3>
+<div *ngIf="searchResult">
 <div class = "row">
   <div class ="col-md-7">
       <img id = "avatar" [src]='searchResult.avatar_url'>
