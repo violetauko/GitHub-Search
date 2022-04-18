@@ -4,15 +4,17 @@ import { HttpClient} from '@angular/common/http';
 import { throwError,catchError } from 'rxjs';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class GithubSearchService {
-  searchRepository: any;
+  private userName!:string;
+  
 
   constructor(private http:HttpClient) { }
   getUser(): Promise<any> {
-    return this.http.get("https://api.github.com/users/violetauko?Authorization=Basic " +environment.apiKey)
+    return this.http.get(`${environment.apiUrl}${this.userName}??Authorization=+${environment.apiKey}`)
     .pipe(
       catchError(err=>{
         console.log(err);
@@ -22,7 +24,7 @@ export class GithubSearchService {
     ).toPromise();
   }
   getRepositories(): Promise<any> {
-    return this.http.get("https://api.github.com/users/violetauko?Authorization=Basic " +environment.apiKey)
+    return this.http.get(`${environment.apiUrl}${this.userName}/repos??Authorization=+${environment.apiKey}`)
     .pipe(
       catchError(err=>{
         console.log(err);
@@ -32,7 +34,7 @@ export class GithubSearchService {
     ).toPromise();
   }
   searchUser(login: string): Promise<any> {
-    return this.http.get(`https://api.github.com/users/${login}`)
+    return this.http.get(`${environment.apiUrl}${login}`)
     .pipe(
       catchError(err=>{
         console.log(err);
@@ -61,4 +63,14 @@ export class GithubSearchService {
       })
     ).toPromise();
   }
+  searchRepositories(login: string): Promise<any> {
+    return this.http.get(`${environment.apiUrl}${login}/repos`)
+    .pipe(
+      catchError(err=>{
+        console.log(err);
+        return throwError(
+          'Something bad happened; please try again later.');
+      })
+    ).toPromise();
+}
 }

@@ -1,14 +1,18 @@
 <form class="d-flex" #repositoryform='ngForm'>
   <input [(ngModel)]="searchText"  name="text" class="form-control me-2" type="search" placeholder="enter username" aria-label="Search">
-  <button class="btn btn-outline-success"  (click)="searchRepository()">Search</button>
+  <button class="btn btn-outline-success"  (click)="searchRepositories()">Search</button>
 </form>
 
-<!-- <div *ngFor="let repository of repositories"> -->
+<div *ngFor="let repository of repositories;let i =index">
+ 
+  <div class = "col-md-6" >
+    <hr>
+    <h3>{{repository.name}}</h3>
+    <p>{{repository.description}}</p>
+    <a class = "btn btn-info" href = {{repository.html_url}}>Go to Repo!</a>
+</div>
 
-
-<div class ="container">
-<div class = "row">
   
   
 </div>
-</div> 
+

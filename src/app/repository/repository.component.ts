@@ -8,49 +8,35 @@ import { GithubSearchService } from '../../app/github-search.service';
   styleUrls: ['./repository.component.css'],
 })
 export class RepositoryComponent implements OnInit {
-  searchText!: string;
-  searchResult!: Repository;
+  
+  searchResult!: Repository
+  repositories:Repository[] = [];
 
   githubsearch: GithubSearchService;
-  repositories!: Repository;
+  searchText: any;
+  
 
   constructor(githubsearch: GithubSearchService) {
     this.githubsearch = githubsearch;
   }
 
   ngOnInit(): void {
-    this.githubsearch
-      .getRepositories()
-      .then((data) => {
-        this.repositories = new Repository(
-          data.name,
-          data.html_url,
-          data.language,
-          data.description
-        );
+    this.githubsearch.getRepositories().then((repositories) => {
+        this.repositories = repositories
       })
       .catch((error) => {
         console.error(error);
       });
   }
-  searchRepository(): void {
+  searchRepositories(): void {
     console.log(this.searchText);
     this.githubsearch
-      .searchRepository(this.searchText)
-      .then(
-        (data: {
-          name: string;
-          html_url: string;
-          language: string;
-          description: string;
-        }) => {
-          this.searchResult = new Repository(
-            data.name,
-            data.html_url,
-            data.language,
-            data.description
-          );
-        }
-      );
+      .searchRepositories(this.searchText)
+      .then((searchResult) => {
+        console.log(searchResult);
+        this.repositories = searchResult
+           
+})
   }
+
 }
