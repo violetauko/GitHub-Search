@@ -1,6 +1,6 @@
 <form class="d-flex" #userform='ngForm' id="form">
   <input [(ngModel)]="searchText"  name="searchText" class="form-control me-2" type="search" placeholder="enter username" aria-label="Search">
-  <button class="btn btn-outline-success"  (click)="searchUser()">Search</button>
+  <button class="btn btn-outline-dark"  (click)="searchUser()">Search</button>
 </form>
 
 <div *ngIf="searchResult">
