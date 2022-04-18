@@ -1,5 +1,5 @@
-<form class="d-flex" #repositoryform='ngForm'>
-  <input [(ngModel)]="searchText"  name="text" class="form-control me-2" type="search" placeholder="enter username" aria-label="Search">
+<form class="d-flex" #repositoryform='ngForm' id="form">
+  <input [(ngModel)]="searchText"  name="text" class="form-control me-2" type="search" placeholder="search repo by username" aria-label="Search">
   <button class="btn btn-outline-success"  (click)="searchRepositories()">Search</button>
 </form>
 
